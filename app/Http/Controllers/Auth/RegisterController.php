@@ -30,7 +30,18 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo()
+    {
+        $user = auth()->user();
+
+        if ($user->isDoctor())
+        {
+            return route('doctor.dashboard');
+        }
+
+        if ($user->isPatient())
+            return route('patient.dashboard');
+    }
 
     /**
      * Create a new controller instance.
@@ -57,6 +68,7 @@ class RegisterController extends Controller
             'sex' => ['required', 'string', 'max:255'],
             'specialisation' => ['required', 'string', 'max:255'],
             'tel' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -75,6 +87,7 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'role' => $data['role'],
             'password' => Hash::make($data['password']),
         ]);
 

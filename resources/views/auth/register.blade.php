@@ -1,16 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container register-box">
+    <div class="row justify-content-center mt-5">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" novalidate>
                         @csrf
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
                             <div class="col-md-6">
@@ -48,6 +47,22 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                            <div class="col-md-6">
+                                <select name="role" id="role" class="form-control">
+                                    <option value="">select</option>
+                                    <option value="Doctor">Doctor</option>
+                                    <option value="Patient">Patient</option>
+                                </select>
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('Sex') }}</label>
                             <div class="col-md-6">
                                 <select name="sex" id="sex" class="form-control">
@@ -62,7 +77,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" id="qualification">
                             <label for="specialisation" class="col-md-4 col-form-label text-md-right">{{ __('Qualification/Specialisation') }}</label>
                             <div class="col-md-6">
                                 <input id="specialisation" type="text" class="form-control @error('specialisation') is-invalid @enderror" name="specialisation" value="{{ old('specialisation') }}" required autocomplete="specialisation" autofocus>

@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Doctor extends Model
+class TimeSlot extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'doctors';
+    protected $table = 'time_slots';
 
     /**
      * The attributes that aren't mass assignable.

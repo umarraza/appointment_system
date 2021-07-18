@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function doctorDashboard()
+    {
+        return view('backend.dashboard');
+    }
+
+    public function patientDashboard()
+    {
+        return view('frontend.dashboard');
+    }
 }
