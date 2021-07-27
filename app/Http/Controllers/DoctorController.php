@@ -10,16 +10,24 @@ use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
+    public function patientsList()
+    {
+        $patients = SlotBooking::where('doctor_id', auth()->user()->id)->distinct()->pluck('patient_id');
+
+        $patients = User::whereIn('id', $patients)->get();
+        return view('backend.doctors.patients', compact('patients'));
+    }
+
     public function appointments()
     {
-        $appointments = auth()->user()->appointments->where('status', 'pending');
+        $appointments = auth()->user()->doctorAppointments->where('status', 'pending');
 
         return view('backend.doctors.appointments', compact('appointments'));
     }
 
     public function bookedappointments()
     {
-        $appointments = auth()->user()->appointments->where('status', 'approved');
+        $appointments = auth()->user()->doctorAppointments->where('status', 'approved');
 
         return view('backend.doctors.appointments', compact('appointments'));
     }
@@ -52,7 +60,7 @@ class DoctorController extends Controller
             if ($request->ajax())
             {
 
-                $booking = SlotBooking::where('pateint_id', auth()->user()->id)
+                $booking = SlotBooking::where('patient_id', auth()->user()->id)
                     ->whereDate('date', now())
                     ->where('doctor_id', $request->doctor_id)
                     ->where('start_time', $request->start_time)
@@ -68,7 +76,7 @@ class DoctorController extends Controller
     
                 $booking = SlotBooking::create([
                     'date'          => now(),
-                    'pateint_id'    => auth()->user()->id,
+                    'patient_id'    => auth()->user()->id,
                     'doctor_id'     => $request->doctor_id,
                     'slot_id'       => $request->slot_id,
                     'start_time'    => $slot->start_time,
@@ -96,7 +104,7 @@ class DoctorController extends Controller
                 'status' => 'approved'
             ]);
 
-            $appointments = auth()->user()->appointments->where('status', 'pending');
+            $appointments = auth()->user()->doctorAppointments->where('status', 'pending');
 
             return response()->json(['success' => true]);
         }

@@ -35,6 +35,18 @@
             </li>
         </ul>
     </nav>
+    @if (auth()->user()->isPatient())
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="{{ route('patient.visit_history') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Patient Visit History</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    @endif
     @if (auth()->user()->isDoctor())
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -52,6 +64,16 @@
                     <a href="{{ route('doctor.appointments.booked') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Booked Appoinments</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('doctor.patients') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Patients</p>
                     </a>
                 </li>
             </ul>

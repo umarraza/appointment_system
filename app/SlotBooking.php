@@ -29,7 +29,7 @@ class SlotBooking extends Model
     protected $dates = ['date', 'updated_at', 'deleted_at'];
 
 
-    public function pateint()
+    public function patient()
     {
         return $this->belongsTo(User::class);
     }

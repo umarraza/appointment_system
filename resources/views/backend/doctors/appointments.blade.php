@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title') Booked Appointments | Appointment System @endsection
 
 @section('content')
 <div class="content-wrapper">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
-use App\Doctor;
+use App\Profile;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -91,11 +91,11 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $doctor = Doctor::create([
+        Profile::create([
             'user_id' => $user->id,
             'age' => $data['age'],
             'sex' => $data['sex'],
-            'specialisation' => $data['specialisation'],
+            'specialisation' => $user->role == 'Doctor' ? $data['specialisation'] : NULL,
             'tel' => $data['tel'],
             'address' => $data['address'],
         ]);

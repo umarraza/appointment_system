@@ -14,7 +14,7 @@
         @foreach ($appointments as $appointment)
             <tr>
                 <td>{{ $appointment->date->format('m-d-Y') }}</td>
-                <td>{{ $appointment->pateint->first_name . ' ' . $appointment->pateint->first_name }}</td>
+                <td><a href="">{{ $appointment->patient->full_name }}</a></td>
                 <td>{{ $appointment->start_time }}</td>
                 <td>{!! $appointment->status_label !!}</td>
                 @if (Route::getCurrentRoute()->getName() == 'doctor.appointments')
@@ -27,3 +27,5 @@
         @endforeach
     </tbody>
 </table>
+
+ 

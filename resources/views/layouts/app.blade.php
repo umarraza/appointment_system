@@ -4,8 +4,11 @@
         <meta charset="utf-8">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Appointment System</title>
-      
+        <title>@yield('title') | Appointment System</title>
+
+        <!-- Font Awessome: -->
+        <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
+        <link rel="stylesheet" href="{{ asset('fontawesome/scss/fontawesome.scss') }}">
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <!-- Font Awesome -->
@@ -40,6 +43,8 @@
             @yield('content')
         </div>
     </div>
+
+    <script src="{{ asset('fontawesome/js/all.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css">
