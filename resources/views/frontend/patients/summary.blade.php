@@ -8,19 +8,17 @@
     <div class="row mt-5">
         <div class="col-md-12">
             <div class="card" style="padding: 10px">
-                <div class="card-header bg-primary header-main" style="height: 6em">
-                    <div class="row mt-3">
-                        <div class="col-md-4">
-                            <a href="{{ route('patient.summary.index', ['id' => $patient->id]) }}" class="btn btn-sm btn-light"><i class="fa-solid fa-pencil"></i> Back To List</a>
-                            @if (auth()->user()->isDoctor())
-                                <a href="" class="btn btn-sm btn-light"><i class="fa-solid fa-pencil"></i> Edit Summary</a>
-                            @endif
-                        </div>
-                        <div class="col-md-4">
-                            <h5 class="text-center">Visit Summary</h5>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
+                <div class="card-header bg-primary header-main">
+                    <h3 class="card-title">Visit Summary</h3>
+                    @if (auth()->user()->isDoctor())
+                        <a href="{{ route('patient.summary.index', ['id' => $patient->id]) }}" class="btn btn-default btn-xs float-right" style="color: #000 !important">
+                            Back To List
+                        </a>
+                    @elseif (auth()->user()->isPatient())
+                        <a href="{{ route('patient.visit_history') }}" class="btn btn-default btn-xs float-right" style="color: #000 !important">
+                            Back To List
+                        </a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive" style="overflow: hidden">
@@ -48,7 +46,7 @@
                                     <tbody>
                                         <tr>
                                             <th>Name</th>
-                                            <td>Dr. {{ $patient->full_name }}</td>
+                                            <td>{{ $patient->full_name }}</td>
                                         </tr>
                                         <tr>
                                             <th>Phone:</th>
@@ -89,11 +87,11 @@
                             </div>
                         </div>
                         <h3><b>Current Medications</b></h3>
-                        <p>No Active medications</p>
+                        <p>{{ isset($booking->summary) ? $booking->summary->medicine_details : '' }}</p>
                         <h3><b>Allergies</b></h3>
-                        <p>No Known Allergies</p>
+                        <p>{{ isset($booking->summary) ? $booking->summary->allergies : '' }}</p>
                         <h3><b>Reason for visit stated by patient</b></h3>
-                        <p>Can you please help me with my health concern</p>
+                        <p>{{ isset($booking->summary) ? $booking->summary->reason_of_visit : '' }}</p>
                     </div>
                 </div>
             </div>

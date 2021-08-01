@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Create Time Slots
+@endsection
 @section('content')
 <div class="content-wrapper">
     <div class="row justify-content-center mt-5">

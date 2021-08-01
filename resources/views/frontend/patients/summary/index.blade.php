@@ -6,20 +6,12 @@
 @section('content')
 <div class="content-wrapper">
     <div class="card mt-5" style="padding: 10px">
-        <div class="card-header bg-primary header-main" style="height: 6em">
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <a href="{{ route('patient.summary.create', $patient->id) }}" class="btn btn-sm btn-light"><i class="fa-solid fa-pencil"></i> Add Summary</a>
-                </div>
-                <div class="col-md-4">
-                    <h5 class="text-center">Visit Summary</h5>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
+        <div class="card-header bg-primary header-main">
+            <h3 class="card-title">{{ $patient->full_name }} Vist Summary</h3>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table daily_logs_table">
+                <table class="table table-sm">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -30,14 +22,17 @@
                     </thead>
                     <tbody>
                         @foreach($patient->patientAppointments as $appointment)
-                            <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $appointment->date->toFormattedDateString() }}</td>
-                                <td>{{ $appointment->start_time }}</td>
-                                <td>
-                                    <a href="{{ route('patient.summary.show', $appointment->id) }}" class="btn btn-success">Show</a>
-                                </td>
-                            </tr>
+                            @if ($appointment->status == 'approved')
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $appointment->date->toFormattedDateString() }}</td>
+                                    <td>{{ $appointment->start_time }}</td>
+                                    <td>
+                                        <a href="{{ route('patient.summary.edit', $appointment->id) }}" class="btn btn-info btn-xs">Edit</a>
+                                        <a href="{{ route('patient.summary.show', $appointment->id) }}" class="btn btn-success btn-xs">Show</a>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

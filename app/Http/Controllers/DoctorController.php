@@ -36,8 +36,8 @@ class DoctorController extends Controller
     {
         if ($request->ajax()) {
 
-            $doctors = User::join('doctors as doctor', 'doctor.user_id', '=', 'users.id')
-                ->where('doctor.specialisation', 'LIKE', '%' . $request->get('specialisation') . '%')
+            $doctors = User::join('profiles as profile', 'profile.user_id', '=', 'users.id')
+                ->where('profile.specialisation', 'LIKE', '%' . $request->get('specialisation') . '%')
                 ->where('users.role','=', 'Doctor')
                 ->get();
                 

@@ -45,15 +45,14 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     Route::get('patient/history', 'PatientController@history')->name('patient.visit_history');
 
-
-
     Route::post('booking/slot/accept', 'DoctorController@acceptBooking')->name('doctor.slot.booking.confirm');
     Route::post('booking/slot/reject', 'DoctorController@rejectBooking')->name('doctor.slot.booking.reject');
 
-
     Route::get('patient/summary/{patient}/create', 'PatientSummaryController@create')->name('patient.summary.create');
+    Route::get('patient/summary/{booking}/edit', 'PatientSummaryController@edit')->name('patient.summary.edit');
     Route::get('patient/summary', 'PatientSummaryController@index')->name('patient.summary.index');
     Route::get('patient/summary/{booking}', 'PatientSummaryController@show')->name('patient.summary.show');
     Route::post('patient/summary/{patient}', 'PatientSummaryController@store')->name('patient.summary.store');
+    Route::post('patient/summary/{booking}/update', 'PatientSummaryController@update')->name('patient.summary.update');
 });
 

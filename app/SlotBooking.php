@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\PatientSummary;
 use Illuminate\Database\Eloquent\Model;
 
 class SlotBooking extends Model
@@ -32,6 +33,11 @@ class SlotBooking extends Model
     public function patient()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function summary()
+    {
+        return $this->hasOne(PatientSummary::class, 'booking_id');
     }
 
     // public function slot()

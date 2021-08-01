@@ -5,14 +5,15 @@
 <div class="content-wrapper">
     <div class="row mt-5">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Appointments</h3>
+            <div class="card" style="padding: 10px">
+                <div class="card-header bg-primary header-main">
+                    <h3 class="card-title">Patients</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-sm">
                         <thead>
                             <tr>
+                                <th scope="col">#</th>
                                 <th>Patient Name</th>
                                 <th>Age</th>
                                 <th>Gender</th>
@@ -23,6 +24,7 @@
                         <tbody>
                             @foreach ($patients as $patient)
                                 <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td><a href="">{{ $patient->full_name }}</a></td>
                                     <td>{{ $patient->profile->age }}</td>
                                     <td>{{ $patient->profile->sex }}</td>

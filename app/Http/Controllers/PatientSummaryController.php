@@ -41,4 +41,37 @@ class PatientSummaryController extends Controller
 
         return view('frontend.patients.summary', compact('patient', 'booking'));
     }
+
+    public function edit(SlotBooking $booking)
+    {
+        $summary = PatientSummary::where('booking_id', $booking->id)->first();
+        
+        return view('frontend.patients.summary.edit', compact('booking', 'summary'));
+    }
+
+    public function update(Request $request, SlotBooking $booking)
+    {
+        if ($booking->summary()->exists())
+        {
+            $booking->summary->update([
+                'medicine_details'  => $request->medication,
+                'allergies'  => $request->allergies,
+                'reason_of_visit'  => $request->reason_of_visit,
+                'revisit'  => $request->has('revisit') ? 1 : 0,
+            ]);
+        } else
+        {
+            PatientSummary::create([
+                'patient_id'        => $booking->patient->id,
+                'booking_id'        => $booking->id,
+                'medicine_details'  => $request->medication,
+                'allergies'  => $request->allergies,
+                'reason_of_visit'  => $request->reason_of_visit,
+                'revisit'  => $request->has('revisit') ? 1 : 0,
+            ]);
+        }
+
+
+        return redirect()->route('patient.summary.show', $booking->id);
+    }
 }
