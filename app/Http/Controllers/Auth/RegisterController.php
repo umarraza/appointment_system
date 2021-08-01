@@ -61,18 +61,24 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'age' => ['required'],
-            'sex' => ['required', 'string', 'max:255'],
-            'specialisation' => ['required', 'string', 'max:255'],
-            'tel' => ['required', 'string', 'max:255'],
-            'role' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $rules = [
+            'first_name'        => ['required', 'string', 'max:255'],
+            'last_name'         => ['required', 'string', 'max:255'],
+            'age'               => ['required'],
+            'sex'               => ['required', 'string', 'max:255'],
+            'tel'               => ['required', 'string', 'max:255'],
+            'role'              => ['required', 'string', 'max:255'],
+            'address'           => ['required', 'string', 'max:255'],
+            'email'             => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'          => ['required', 'string', 'min:8', 'confirmed'],
+        ];
+
+        if ($data['role'] == 'Doctor')
+        {
+            $rules['specialisation'] = ['required', 'string', 'max:255'];
+        }
+
+        return Validator::make($data, $rules);
     }
 
     /**

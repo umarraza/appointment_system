@@ -47,10 +47,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Register As') }}</label>
                             <div class="col-md-6">
-                                <select name="role" id="role" class="form-control">
-                                    <option value="">select</option>
+                                <select name="role" id="pick-role" class="form-control">
                                     <option value="Doctor">Doctor</option>
                                     <option value="Patient">Patient</option>
                                 </select>

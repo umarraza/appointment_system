@@ -55,7 +55,17 @@
     
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('AdminLTE-3.1.0/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
 
+            $('#pick-role').on('change', function() {
+                if ($(this).val() == 'Doctor')
+                    $('#qualification').show()
+                else
+                    $('#qualification').hide()
+            });
+        });
+    </script>
     
 </body>
 </html>
