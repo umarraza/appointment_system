@@ -30,7 +30,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{ auth()->user()->doctorAppointments()->where('status', 'pending')->count() }}</h3>
 
                 <p>New Appointments</p>
               </div>

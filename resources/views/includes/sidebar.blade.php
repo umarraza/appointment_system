@@ -28,6 +28,16 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
+                <a href="{{ route('user.profile', auth()->user()->id) }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Account</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
                 <a href="{{ auth()->user()->isDoctor() ? route('doctor.dashboard')  : route('patient.dashboard') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard</p>

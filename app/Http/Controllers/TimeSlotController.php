@@ -27,23 +27,22 @@ class TimeSlotController extends Controller
         
         foreach($period as $item)
         {
-            array_push($slots,$item->format("h:i A"));
+            array_push($slots,date("G:i", strtotime($item)));
         }
 
         for ($i=0; $i < count($slots); $i++) {
-
             if (isset($slots[$i+1]))
             {
                 TimeSlot::create([
                     'doctor_id' => auth()->user()->id,
                     'date' => now(),
-                    'start_time' => date("h:i", strtotime( $slots[$i] )),
-                    'end_time' => date("h:i", strtotime( $slots[$i+1] )),
+                    'start_time' => $slots[$i],
+                    'end_time' => $slots[$i+1],
                     'status' => 'available',
                 ]);
             }
         }
-
+        
         return redirect()->route('time_slots.index')->withSlots(auth()->user()->slots)->withMessage('success', 'Slots created successfully!');
     }
 }

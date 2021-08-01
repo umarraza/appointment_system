@@ -25,7 +25,7 @@
                             @foreach ($patients as $patient)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td><a href="">{{ $patient->full_name }}</a></td>
+                                    <td><a href="{{ route('user.profile', $patient->id) }}">{{ $patient->full_name }}</a></td>
                                     <td>{{ $patient->profile->age }}</td>
                                     <td>{{ $patient->profile->sex }}</td>
                                     <td>{{ $patient->profile->date_of_birth }}</td>

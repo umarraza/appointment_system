@@ -15,13 +15,17 @@
                 </div>
                 <div class="card-body" id="slots-section">
                     <div class="row mt-5">
-                        @foreach (auth()->user()->slots as $slot)
-                            <div class="color-palette-set slots-color-palette-set ml-5">
-                                <div class="bg-info disabled color-palette slot-color-palette" style="padding: 5px 0 5px 21px;width: 100px;border-radius: 7px; margin-top:10px; box-shadow: 0 7px 6px -6px black;">
-                                    <a href="javascript::void(0)">{{ $slot->start_time }}</a>
+                        @if (auth()->user()->slots->count() > 0)
+                            @foreach (auth()->user()->slots as $slot)
+                                <div class="color-palette-set slots-color-palette-set ml-5">
+                                    <div class="bg-info disabled color-palette slot-color-palette" style="padding: 5px 0 5px 21px;width: 100px;border-radius: 7px; margin-top:10px; box-shadow: 0 7px 6px -6px black;">
+                                        <a href="javascript::void(0)">{{ date('h:i a', strtotime($slot->start_time)) }}</a>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        @else
+                        <p>No Time Slots Created!</p>
+                        @endif
                     </div>
                 </div>
             </div>

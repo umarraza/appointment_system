@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\User;
+use App\Profile;
 use App\TimeSlot;
 use App\SlotBooking;
 use Illuminate\Http\Request;
@@ -46,9 +47,9 @@ class DoctorController extends Controller
         }
     }
 
-    public function show(User $user)
+    public function show(Profile $profile)
     {
-        $slots = $user->slots()->where('status', 'available')->get();
+        $slots = $profile->user->slots()->where('status', 'available')->get();
         return view('backend.doctors.show', compact('slots'));
     }
 

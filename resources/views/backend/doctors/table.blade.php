@@ -16,8 +16,8 @@
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $appointment->date->format('m-d-Y') }}</td>
-                <td><a href="">{{ $appointment->patient->full_name }}</a></td>
-                <td>{{ $appointment->start_time }}</td>
+                <td><a href="{{ route('user.profile', $appointment->patient->id) }}">{{ $appointment->patient->full_name }}</a></td>
+                <td>{{ date('h:i a', strtotime($appointment->start_time)) }}</td>
                 <td>{!! $appointment->status_label !!}</td>
                 @if (Route::getCurrentRoute()->getName() == 'doctor.appointments')
                     <td> 

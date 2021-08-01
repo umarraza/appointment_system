@@ -27,6 +27,9 @@ Route::get('/', 'WelcomeController@welcome');
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'web']], function () {
+
+    Route::get('/profile/{user}', 'ProfileController@index')->name('user.profile');
+
     Route::get('doctor/appointments', 'DoctorController@appointments')->name('doctor.appointments');
     Route::get('doctor/b/appointments', 'DoctorController@bookedappointments')->name('doctor.appointments.booked');
 
@@ -39,7 +42,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::post('time_slots', 'TimeSlotController@store')->name('time_slots.store');
     Route::get('time_slots', 'TimeSlotController@index')->name('time_slots.index');
     Route::post('search', 'DoctorController@search')->name('doctors.search');
-    Route::get('doctor/{user}', 'DoctorController@show')->name('doctor.show');
+    Route::get('doctor/{profile}', 'DoctorController@show')->name('doctor.show');
     Route::post('book/slot', 'DoctorController@bookSlot')->name('doctor.slot.book');
     Route::get('patients', 'DoctorController@patientsList')->name('doctor.patients');
 
