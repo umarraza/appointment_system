@@ -25,7 +25,7 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $appointment->date->toFormattedDateString() }}</td>
-                                <td>{{ $appointment->start_time }}</td>
+                                <td>{{ date('h:i a', strtotime($appointment->start_time)) }}</td>
                                 <td>
                                     <a href="{{ route('patient.summary.show', $appointment->id) }}" class="btn btn-success btn-xs">Show</a>
                                 </td>
