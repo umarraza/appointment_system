@@ -44,9 +44,7 @@
 
     <div id="app">
         <div class="wrapper">
-
             @yield('content')
-        
         </div>
     </div>
 

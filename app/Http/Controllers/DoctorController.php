@@ -7,7 +7,10 @@ use App\User;
 use App\Profile;
 use App\TimeSlot;
 use App\SlotBooking;
+use App\Events\NewBooking;
 use Illuminate\Http\Request;
+use App\Events\BookingAccepted;
+use App\Events\BookingRejected;
 
 class DoctorController extends Controller
 {
@@ -26,9 +29,16 @@ class DoctorController extends Controller
         return view('backend.doctors.appointments', compact('appointments'));
     }
 
-    public function bookedappointments()
+    public function bookedAppointments()
     {
         $appointments = auth()->user()->doctorAppointments->where('status', 'approved');
+
+        return view('backend.doctors.appointments', compact('appointments'));
+    }
+
+    public function canceledAppointments()
+    {
+        $appointments = auth()->user()->doctorAppointments->where('status', 'rejected');
 
         return view('backend.doctors.appointments', compact('appointments'));
     }
@@ -85,11 +95,13 @@ class DoctorController extends Controller
                     'status'        => 'pending',
                 ]);
 
+                event(new NewBooking($booking));
+
                 $slot->update(['status' => 'pending']);
 
                 DB::commit();
 
-                return response()->json(['success' => 'Request has been sent for your booking!']);
+                return response()->json(['success' => 'Your request has been successfully submitted and is being processed!']);
             }
         } catch (\Throwable $th) {
             DB::rollback();
@@ -99,20 +111,53 @@ class DoctorController extends Controller
 
     public function acceptBooking(Request $request)
     {
-        if ($request->ajax()) {
-            
-            $booking = SlotBooking::find($request->id)->update([
-                'status' => 'approved'
-            ]);
+        DB::beginTransaction();
+        try {
 
-            $appointments = auth()->user()->doctorAppointments->where('status', 'pending');
+            if ($request->ajax()) {
+            
+                $booking = SlotBooking::find($request->id);
+
+                $booking->update([
+                    'status' => 'approved'
+                ]);
+    
+                event(new BookingAccepted($booking));
+            }
+
+            DB::commit();
 
             return response()->json(['success' => true]);
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['message' => 'Something went wrong, internal server error!']);
         }
     }
 
-    public function rejectBooking()
+    public function rejectBooking(Request $request)
     {
+        DB::beginTransaction();
+        try {
 
+            if ($request->ajax()) {
+            
+                $booking = SlotBooking::find($request->id);
+
+                $booking->update([
+                    'status' => 'rejected'
+                ]);
+    
+                event(new BookingRejected($booking));
+            }
+
+            DB::commit();
+
+            return response()->json(['success' => true]);
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['message' => 'Something went wrong, internal server error!']);
+        }
     }
 }

@@ -104,4 +104,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function avatarPath()
+    {
+        if(file_exists(storage_path('/app/public/avatars/'.$this->avatar)))
+        {
+            return asset('storage/avatars/'.$this->avatar);
+        }
+
+        return asset('storage/avatars/dummy-avatar.png');
+    }
 }

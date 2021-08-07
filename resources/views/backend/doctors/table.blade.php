@@ -22,7 +22,7 @@
                 @if (Route::getCurrentRoute()->getName() == 'doctor.appointments')
                     <td> 
                         <a href="{{ route('doctor.slot.booking.confirm') }}" data-booking-id="{{ $appointment->id }}" data-booking-status="1" class="btn btn-success btn-xs confirm-booking">Accept</a>    
-                        <a href="{{ route('doctor.slot.booking.reject', $appointment->id) }}" data-booking-status="2" class="btn btn-danger btn-xs">Reject</a>    
+                        <a href="{{ route('doctor.slot.booking.reject') }}" data-booking-id="{{ $appointment->id }}" data-booking-status="2" class="btn btn-danger btn-xs reject-booking">Reject</a>    
                     </td>
                 @endif
             </tr>

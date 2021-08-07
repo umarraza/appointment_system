@@ -15,23 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WelcomeController@welcome');
 
-// Route::get('/clear', function () {
-//     Artisan::call('cache:clear');
-//     Artisan::call('config:clear');
-//     Artisan::call('config:cache');
-//     Artisan::call('view:clear');
-//     Artisan::call('route:clear');
-//     return "Cleared!";
-// });
-
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'web']], function () {
 
     Route::get('/profile/{user}', 'ProfileController@index')->name('user.profile');
+    Route::get('/profile/{user}/edit/', 'ProfileController@edit')->name('profile.edit');
+    Route::post('/profile/{user}/update/', 'ProfileController@update')->name('profile.update');
 
     Route::get('doctor/appointments', 'DoctorController@appointments')->name('doctor.appointments');
-    Route::get('doctor/b/appointments', 'DoctorController@bookedappointments')->name('doctor.appointments.booked');
+    Route::get('doctor/b/appointments', 'DoctorController@bookedAppointments')->name('doctor.appointments.booked');
+    Route::get('doctor/c/appointments', 'DoctorController@canceledAppointments')->name('doctor.appointments.cenceled');
 
     Route::get('/home', 'HomeController@index')->name('home');
 

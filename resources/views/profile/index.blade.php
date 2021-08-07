@@ -3,7 +3,6 @@
 
 @section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -17,30 +16,26 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-
-            <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="{{ asset('AdminLTE-3.1.0/dist/img/user2-160x160.jpg') }}"
-                       alt="User profile picture">
+                       src="{{ auth()->user()->avatarPath() }}"
+                       alt="User profile picture" style="height: 100px !important;">
                 </div>
-
                 <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
-
                 @if ($user->isDoctor())    
                     <p class="text-muted text-center">{{ $user->profile->specialisation }}</p>
                 @endif
-
+                <div class="text-center mb-2">
+                  <a href="{{ route('profile.edit', $user->id) }}" type="buttn" class="btn btn-primary">Edit Profile</a>
+                </div>
                 <ul class="list-group list-group-unbordered mb-3" style="width: 50em; margin-left: auto; margin-right: auto;">
                   <li class="list-group-item">
                     <b>Age</b> <p class="float-right">{{ $user->profile->age }}</p>
@@ -55,7 +50,7 @@
                     <b>Address</b> <p class="float-right">{{ $user->profile->address }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Date Of Birth</b> <p class="float-right">{{ $user->profile->date_of_birth }}</p>
+                    <b>Date Of Birth</b> <p class="float-right">{{ $user->profile->date_of_birth ? $user->profile->date_of_birth->format('m-d-Y') : '' }}</p>
                   </li>
                   <li class="list-group-item">
                     <b>Language</b> <p class="float-right">{{ $user->profile->language }}</p>

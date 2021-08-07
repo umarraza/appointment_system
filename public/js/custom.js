@@ -36,9 +36,13 @@
                 confirmButtonText: 'Book!',
                 showCancelButton: false,
                 // cancelButtonText: 'No!',
-                reverseButtons: false
+                reverseButtons: false,
             }).then((result) => {
                 if (result.value) {
+
+                    Swal.fire(
+                        'Your request is being processed... please wait!',
+                    )
 
                     var start_time = $(e.target).text();
                     var doctor_id = $(e.target).attr('data-doctor-id');
@@ -53,12 +57,13 @@
                     })
                     .done(function(response) {
                         if (response.success) {
+                            
                             Swal.fire(
                                 'Request sent!',
                                 response.success,
                                 'success'
                             )
-                            location.reload();
+                            setTimeout(function(){location.reload()}, 5000);
                         } else {
                             Swal.fire(
                                 'Oops!',

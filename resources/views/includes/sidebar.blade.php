@@ -3,16 +3,12 @@
     <img src="{{ asset('AdminLTE-3.1.0/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8;">
     <span class="brand-text font-weight-light" style="font-size:15px">Online Appointment System</span>
 </a>
-
 <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-            <img src="{{ asset('AdminLTE-3.1.0/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-            @auth
-                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
-            @endauth
+        <div class="image text-center" style="padding-left: 4.4rem !important;">
+            <img src="{{ auth()->user()->avatarPath() }}" class="img-circle elevation-2" alt="User Image" style="width: 100px; height: 100px;">
+            <a href="#" class="d-block mt-1">{{ auth()->user()->full_name }}</a>
+            <span class="badge badge-info">{{ auth()->user()->role }}</span>
         </div>
     </div>
     <div class="form-inline">
@@ -74,6 +70,16 @@
                     <a href="{{ route('doctor.appointments.booked') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Booked Appoinments</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('doctor.appointments.cenceled') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Canceled Appoinments</p>
                     </a>
                 </li>
             </ul>
