@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('/profile/{user}/edit/', 'ProfileController@edit')->name('profile.edit');
     Route::post('/profile/{user}/update/', 'ProfileController@update')->name('profile.update');
 
-    Route::get('doctor/appointments', 'DoctorController@appointments')->name('doctor.appointments');
+    Route::get('doctor/n/appointments', 'DoctorController@appointments')->name('doctor.appointments.new');
     Route::get('doctor/b/appointments', 'DoctorController@bookedAppointments')->name('doctor.appointments.booked');
     Route::get('doctor/c/appointments', 'DoctorController@canceledAppointments')->name('doctor.appointments.cenceled');
 

@@ -9,3 +9,8 @@ function _specialisations()
 
     return Profile::whereIn('user_id', $users)->pluck('specialisation');
 }
+
+function activeUrlClass($route, $class = 'active')
+{
+    return strpos(Route::currentRouteName(), $route) === 0 ? $class : '';
+}
