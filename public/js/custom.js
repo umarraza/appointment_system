@@ -63,7 +63,7 @@
                                 response.success,
                                 'success'
                             )
-                            setTimeout(function(){location.reload()}, 5000);
+                            setTimeout(function(){location.reload()}, 3000);
                         } else {
                             Swal.fire(
                                 'Oops!',

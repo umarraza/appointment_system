@@ -31,6 +31,8 @@
         <link rel="stylesheet" href="{{ asset('AdminLTE-3.1.0/plugins/dropzone/min/dropzone.min.css') }}">
         <!-- Theme style -->
         <link rel="stylesheet" href="{{ asset('AdminLTE-3.1.0/dist/css/adminlte.min.css') }}">
+        <!-- Custom style -->
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
       </head>
 <body>
     <div id="app">

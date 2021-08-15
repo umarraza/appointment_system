@@ -5,6 +5,7 @@
 </a>
 <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        {{-- {{ dd(auth()->user()->avatarPath()) }} --}}
         <div class="image text-center" style="padding-left: 4.4rem !important;">
             <img src="{{ auth()->user()->avatarPath() }}" class="img-circle elevation-2" alt="User Image" style="width: 100px; height: 100px;">
             <a href="#" class="d-block mt-1">{{ auth()->user()->full_name }}</a>

@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\BookingRejected' => [
             'App\Listeners\BookingRejectedListener',
         ],
+        'App\Events\RevisitPatientEvent' => [
+            'App\Listeners\RevisitPatientListener',
+        ],
     ];
 
     /**

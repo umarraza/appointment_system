@@ -6,6 +6,7 @@ use App\Profile;
 use App\TimeSlot;
 use App\SlotBooking;
 use App\PatientSummary;
+use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -107,7 +108,7 @@ class User extends Authenticatable
 
     public function avatarPath()
     {
-        if(file_exists(storage_path('/app/public/avatars/'.$this->avatar)))
+        if(File::exists(storage_path('app/public/avatars/'.$this->avatar)))
         {
             return asset('storage/avatars/'.$this->avatar);
         }

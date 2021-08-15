@@ -59,7 +59,7 @@ class DoctorController extends Controller
 
     public function show(Profile $profile)
     {
-        $slots = $profile->user->slots()->where('status', 'available')->get();
+        $slots = $profile->user->slots;
         return view('backend.doctors.show', compact('slots'));
     }
 
@@ -117,11 +117,18 @@ class DoctorController extends Controller
             if ($request->ajax()) {
             
                 $booking = SlotBooking::find($request->id);
-
+                
                 $booking->update([
                     'status' => 'approved'
                 ]);
-    
+
+                $slot = TimeSlot::where('doctor_id', $booking->doctor_id)
+                    ->where('date', $booking->date)
+                    ->where('start_time', $booking->start_time)
+                    ->first();
+
+                $slot->update(['status' => 'booked']);
+
                 event(new BookingAccepted($booking));
             }
 
@@ -148,6 +155,13 @@ class DoctorController extends Controller
                     'status' => 'rejected'
                 ]);
     
+                $slot = TimeSlot::where('doctor_id', $booking->doctor_id)
+                    ->where('date', $booking->date)
+                    ->where('start_time', $booking->start_time)
+                    ->first();
+
+                $slot->update(['status' => 'available']);
+
                 event(new BookingRejected($booking));
             }
 

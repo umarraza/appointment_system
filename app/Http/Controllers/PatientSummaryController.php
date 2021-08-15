@@ -6,6 +6,7 @@ use App\User;
 use App\SlotBooking;
 use App\PatientSummary;
 use Illuminate\Http\Request;
+use App\Events\RevisitPatientEvent;
 
 class PatientSummaryController extends Controller
 {
@@ -23,6 +24,7 @@ class PatientSummaryController extends Controller
     public function store(Request $request, User $patient)
     {
         $booking = $patient->patientAppointments->last();
+
         $activity = PatientSummary::updateOrCreate(['patient_id' => $patient->id],[
             'patient_id'        => $patient->id,
             'booking_id'        => $booking->id,
@@ -65,12 +67,17 @@ class PatientSummaryController extends Controller
                 'patient_id'        => $booking->patient->id,
                 'booking_id'        => $booking->id,
                 'medicine_details'  => $request->medication,
-                'allergies'  => $request->allergies,
-                'reason_of_visit'  => $request->reason_of_visit,
-                'revisit'  => $request->has('revisit') ? 1 : 0,
+                'allergies'         => $request->allergies,
+                'reason_of_visit'   => $request->reason_of_visit,
+                'revisit'           => $request->has('revisit') ? 1 : 0,
             ]);
         }
 
+
+        if ($request->revisit == 'on')
+        {
+            event(new RevisitPatientEvent($booking));
+        }
 
         return redirect()->route('patient.summary.show', $booking->id);
     }

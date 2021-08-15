@@ -1,0 +1,23 @@
+.slots_boxes
+{
+    padding: 12px 0 5px 25px;
+    width: 110px;
+    border-radius: 1px;
+    margin-top:10px;
+    margin: 1px;
+    height:50px;
+}
+
+.slots_section_background
+{
+    background: #ececec
+}
+
+.pending_status
+{
+    background: #fba711 !important;
+}
+.booked_status
+{
+    background: #10d69c !important;
+}
