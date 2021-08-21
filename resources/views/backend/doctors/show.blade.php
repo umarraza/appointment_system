@@ -14,7 +14,6 @@
                     <div class="row mt-5">
                         @forelse ($slots as $slot)
                             <div class="bg-info disabled color-palette slot-color-palette slots_boxes {{ $slot->status == 'pending' ? 'pending_status' : '' }} {{ $slot->status == 'booked' ? 'booked_status' : '' }}">
-
                                 @if ($slot->status == 'booked' || $slot->status == 'pending')
                                     <a href="javascript::void(0)">{{ date('h:i a', strtotime($slot->start_time)) }}</a>
                                 @else
