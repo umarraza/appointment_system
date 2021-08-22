@@ -39,6 +39,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            min-height:100%;
+            background: linear-gradient( 0deg , rgb(0 0 0 / 83%), rgba(255, 0, 150, 0.3)), url(../images/register.jpg);
+            background-size:cover;
+        }
+    </style>
 </head>
 <body>
 

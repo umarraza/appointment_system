@@ -8,7 +8,7 @@
         <div class="col-md-8" style="margin-top: 6%">
             <div class="card">
                 <div class="card-header bg-primary header-main">
-                    <h3 class="card-title">Booking Slots &nbsp;&nbsp;<span class="badge badge-light">{{ auth()->user()->slots->first()->date->toFormattedDateString() }}</span></h3>
+                    <h3 class="card-title">Booking Slots &nbsp;&nbsp;<span class="badge badge-light">{{ auth()->user()->slots->isNotEmpty() ? auth()->user()->slots->first()->date->toFormattedDateString() : '' }}</span></h3>
                     <a href="{{ route('time_slots.create') }}" class="btn btn-default btn-xs float-right" style="color: #000 !important">
                         Create Time Slots
                     </a>

@@ -46,10 +46,13 @@
 
             .title {
                 font-size: 84px;
+                color: #e7e7e7;
+                font-weight: bold;
+                font-family: sans-serif;
             }
 
             .links > a {
-                color: #636b6f;
+                color: #fff;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -61,7 +64,14 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            body {
+                min-height:100%;
+                background: linear-gradient( 0deg , rgb(0 0 0 / 83%), rgba(255, 0, 150, 0.3)), url(../images/background.jpg);
+                background-size:cover;
+            }
+            
         </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -81,8 +91,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Appointment System
+                    Doctor Appointment System
                 </div>
+                {{-- <button class="btn btn-primary">Learn More</button> --}}
+                <button type="button" class="btn btn-outline-light">Learn More</button>
             </div>
         </div>
     </body>

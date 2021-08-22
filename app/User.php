@@ -108,11 +108,13 @@ class User extends Authenticatable
 
     public function avatarPath()
     {
-        if(File::exists(storage_path('app/public/avatars/'.$this->avatar)))
-        {
-            return asset('storage/avatars/'.$this->avatar);
-        }
+        $avatar = file_exists(public_path('storage/avatars/'.$this->avatar));
 
-        return asset('storage/avatars/dummy-avatar.png');
+        return $avatar ? asset('storage/avatars/'.$this->avatar) : $this->defaultGravatarPath();
+    }
+
+    public function defaultGravatarPath()
+    {
+        return 'http://www.gravatar.com/avatar/?d=identicon';
     }
 }
